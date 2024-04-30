@@ -1,10 +1,8 @@
-#define rand(num) \
-{ \
-    byte choices[5] = {1, 2, 3, 4, 5}; \
-    num = choices[_pid % 5]; /* Use _pid for a simple pseudo-random effect based on process id */ \
-}
+mtype = {REQ, RES};
 
-mtype {REQ, RES, CONF};
+inline rand(num) {
+    num = (_pid % 5) + 1; 
+}
 
 proctype Client(chan ch; byte reqCount) {
     byte reqbit, resbit;
@@ -18,11 +16,11 @@ proctype Client(chan ch; byte reqCount) {
         ch ! REQ, reqbit;
         printf("CLIENT: waiting for RES\n");
         ch ? RES, resbit;
-        printf("CLIENT: RES received with value %d, sending CONF\n", resbit);
-        ch ! CONF, resbit;
+        printf("CLIENT: RES received with value %d\n", resbit);
         reqCount = reqCount - 1;
-        printf("CLIENT: CONF sent\n");
-      :: reqCount == 0 -> 
+        printf("CLIENT: REQ and RES process complete for value %d\n", reqbit);
+    :: reqCount == 0 -> 
+        printf("CLIENT: All requests processed. Client stops.\n");
         break;
     od
 }
@@ -38,14 +36,12 @@ proctype Server(chan ch) {
         rand(resbyte);
         printf("SERVER: processing REQ, sending RES with value %d\n", resbyte);
         ch ! RES, resbyte;
-        printf("SERVER: RES sent, waiting for CONF\n");
-        ch ? CONF, resbyte;
-        printf("SERVER: CONF received, corresponding to RES %d\n", resbyte);
+        printf("SERVER: RES sent for request %d\n", reqbyte);
     od
 }
 
 init {
-    chan ch = [2] of { mtype, byte };
+    chan ch = [2] of {mtype, byte};  // Channel with 2 slots for mtype and byte
     run Client(ch, 5);
     run Server(ch);
 }
