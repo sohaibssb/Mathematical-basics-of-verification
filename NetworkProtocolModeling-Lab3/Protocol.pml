@@ -1,4 +1,3 @@
-// Definitions for simplicity
 mtype = { SYN, SYN_ACK, ACK, DATA, FIN };
 
 // Channels for communication
