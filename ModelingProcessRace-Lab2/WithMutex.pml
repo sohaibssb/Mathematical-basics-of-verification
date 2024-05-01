@@ -2,13 +2,13 @@
 #define V(s) s++
 
 show int shared = 1;
-show int semaphore = 1;  // Semaphore initialized to 1
+show int semaphore = 1;  
 
 active proctype Writer() {
   int temp = 10;
 
   P(semaphore);  // Wait operation on the semaphore
-  shared = temp;  // Write operation protected by semaphore
+  shared = temp;  
   printf("Writer: shared = %d\n", shared);
   V(semaphore);  // Signal operation on the semaphore
 }

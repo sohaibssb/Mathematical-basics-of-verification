@@ -1,11 +1,34 @@
 # Mathematical-basics-of-verification
 Promela language, Process Race Simulation, Network Protocol Simulation
 
-Programmed by Sohaibssb for Mathematical-basics-of-verification Course at Bauman University 2024
+Programmed by Sohaibssb for Mathematical-basics-of-verification Course at Bauman University 2024 (для курса «Математические основы верификации» МГТУ им. Н. Э. Баумана университет в 2024 году)
 
-Запрограммировано Sohaibssb для курса «Математические основы верификации» МГТУ им. Н. Э. Баумана университет в 2024 году
+----------------------------------------
 
 Выполнить лабораторную работу №1 
-«Знакомство с языком Promela»
+"Знакомство с языком Promela"
 Задача: Для небольшого фрагмента программы необходимо описать модель этой программы на языке
 Promela и изучить ее (SPIN).
+
+Выполнить лабораторную работу №2 
+"Моделирование гонки процессов"
+Задача:Описать взаимодействие между двумя процессами, работающими с одними и теми же данными. Тогда место возникновения гонки должно быть дополнено мьютексами.
+
+Выполнить лабораторную работу №3
+"Моделирование сетевого протокола"
+Задача: Задача состоит в том, чтобы создать упрощенную модель протокола TCP,
+сосредоточившись на фазах трехстороннего рукопожатия и передачи данных,
+проверить модель с помощью программы проверки моделей SPIN и
+проанализировать полученные результаты.
+
+----------------------------------------
+
+The steps to run the Labs:
+Install all the below requirements:
+SPIN 
+C Compiler (GCC for Linux)
+
+Run the below commands for each file:
+spin -a FileName.pml
+gcc pan.c -o pan
+./pan
